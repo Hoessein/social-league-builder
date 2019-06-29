@@ -1,6 +1,5 @@
 {% load staticfiles %}
 
-<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
 
@@ -60,7 +59,7 @@
               <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
               <li><a href="{% url 'login' %}">Sign In</a></li>
               {% else %}
-              <li><a href="{% url 'profile:something' %}">{{ user.username }}</a></li>
+              <li><a href="{% url 'profile:my_profile' %}">{{ user.username }}</a></li>
               <li><a href="{% url 'accounts:signout' %}">Sign Out</a></li>
               {% endif %}
             </ul>
