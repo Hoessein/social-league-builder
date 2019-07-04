@@ -12,6 +12,7 @@ class UserCreateForm(UserCreationForm):
         self.fields["username"].label = "Display name"
         self.fields["email"].label = "Email address"
 
+
 class ProfileUpdateForm(UserCreationForm):
     class Meta:
         fields = ("username", "email", "password1", "password2")

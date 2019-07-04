@@ -4,7 +4,7 @@
 
 {% block body_content %}
 
-  <form action="" method="POST">
+  <form method="POST">
       {% csrf_token %}
   <div class="circle--actions--bar">
     <nav class="bounds">
@@ -27,11 +27,9 @@
 
 
     <div class="grid-70">
-      <input type="text" value="{{ object.user.username }}" placeholder="Full Name" class="circle--input--h1">
+        {{user_form.username}}
       <div class="circle--article--body">
-        <textarea placeholder="Tell us about yourself...">
-          {{ object.bio }}
-        </textarea>
+          {{ profile_form.bio }}
       </div>
 
       <h2>Past Projects</h2>
