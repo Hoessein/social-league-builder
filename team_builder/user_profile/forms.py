@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 
-from .models import Profile
+from .models import Profile, Skill
 
 
 class EditProfileForm(forms.ModelForm):
@@ -19,4 +19,10 @@ class EditProfileForm(forms.ModelForm):
 class EditUserForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ("username",)
+        fields = ("username", "avatar")
+
+
+class SkillProfileForm(forms.ModelForm):
+    class Meta:
+        model = Skill
+        fields = ("name",)

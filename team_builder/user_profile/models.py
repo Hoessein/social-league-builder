@@ -27,3 +27,7 @@ class Profile(models.Model):
         return reverse('profile:my_profile')
 
 
+class Skill(models.Model):
+    name = models.CharField(max_length=255)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, unique=False)
+

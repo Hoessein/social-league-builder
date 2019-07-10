@@ -4,8 +4,9 @@
 
 {% block body_content %}
 
-  <form method="POST">
-      {% csrf_token %}
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
   <div class="circle--actions--bar">
     <nav class="bounds">
       <ul class="circle--pill--list">
@@ -66,8 +67,9 @@
       <div class="circle--secondary--module">
         <div class="circle--primary--avatar">
           <a class="button">
+            {{ user_form.avatar }}
             Upload Photo
-            <input type="file">
+            <input type="file" value="Update"/>
           </a>
         </div>
       </div>
@@ -77,7 +79,8 @@
         <ul class="circle--clone--list">
           <li>
             <input type="text" placeholder="Skill" />
-            <a class="circle--clone--add">Add Skill</a>
+            <a class="circle--clone--add"></a>
+            {{ skill_form.as_p }}
             <a class="circle--clone--remove">Remove</a>
           </li>
         </ul>
