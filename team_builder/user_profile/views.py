@@ -53,7 +53,23 @@ class MyProfileView(DetailView):
         return context
 
 
+def create_project(request):
+    if request.method == 'POST':
+        create_project_form = forms.CreateProjectForm(request.POST,)
 
+        if create_project_form.is_valid():
+            create_project_form.save()
+            return redirect('profile:my_profile')
+
+    else:
+        create_project_form = forms.CreateProjectForm()
+
+
+    return render(request,
+                  'user_profile/create_project.html',
+                  {'create_project_form': create_project_form,
+                   }
+                  )
 
 
 

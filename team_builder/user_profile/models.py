@@ -31,3 +31,11 @@ class Skill(models.Model):
     name = models.CharField(max_length=255)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, unique=False)
 
+
+class Project(models.Model):
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, unique=False)
+    description = models.TextField(max_length=300)
+    name = models.CharField(max_length=100)
+    skills = models.CharField(max_length=100)
+    # positions = models.ManyToManyField('Postition', blank=True)
+
