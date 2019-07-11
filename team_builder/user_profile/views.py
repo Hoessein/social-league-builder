@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView
 from django.views.generic.edit import UpdateView
 
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 
-from .models import Profile, Skill
+from .models import Profile, Skill, Project
 
 from . import forms
 
@@ -50,6 +50,7 @@ class MyProfileView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['skill'] = Skill.objects.all().filter(user_id=self.request.user)
+        context['project'] = Project.objects.all()
         return context
 
 
@@ -64,7 +65,6 @@ def create_project(request):
     else:
         create_project_form = forms.CreateProjectForm()
 
-
     return render(request,
                   'user_profile/create_project.html',
                   {'create_project_form': create_project_form,
@@ -72,4 +72,7 @@ def create_project(request):
                   )
 
 
-
+class ProjectView(DetailView):
+    template_name = 'user_profile/project.html'
+    model = Project
+    pk_url_kwarg = 'pk'
