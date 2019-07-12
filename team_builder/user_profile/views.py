@@ -5,7 +5,7 @@ from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 
-from .models import Profile, Skill, Project
+from .models import Profile, Skill, Project, Position
 
 from . import forms
 
@@ -57,22 +57,34 @@ class MyProfileView(DetailView):
 def create_project(request):
     if request.method == 'POST':
         create_project_form = forms.CreateProjectForm(request.POST,)
+        create_project_position_form = forms.CreateProjectPositionForm(request.POST,)
 
-        if create_project_form.is_valid():
+        if create_project_form.is_valid() and create_project_position_form.is_valid():
+            create_project_position_form.save()
             create_project_form.save()
             return redirect('profile:my_profile')
 
     else:
         create_project_form = forms.CreateProjectForm()
+        create_project_position_form =forms.CreateProjectPositionForm()
 
     return render(request,
                   'user_profile/create_project.html',
                   {'create_project_form': create_project_form,
+                   'create_project_position_form': create_project_position_form
                    }
                   )
 
 
 class ProjectView(DetailView):
     template_name = 'user_profile/project.html'
-    model = Project
-    pk_url_kwarg = 'pk'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Project, pk=self.kwargs.get('pk'))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['project'] = Project.objects.all().get(pk=self.kwargs.get('pk'))
+        context['position'] = Position.objects.all().get(pk=self.kwargs.get('pk'))
+
+        return context

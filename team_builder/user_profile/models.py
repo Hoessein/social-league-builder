@@ -37,5 +37,15 @@ class Project(models.Model):
     description = models.TextField(max_length=300)
     name = models.CharField(max_length=100)
     skills = models.CharField(max_length=100)
-    # positions = models.ManyToManyField('Postition', blank=True)
+    positions = models.ManyToManyField('Position', blank=True)
+
+
+class Position(models.Model):
+    related_project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        null=True)
+    applicants = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, unique=False)
+    skill = models.ForeignKey('Skill', on_delete=models.CASCADE, null=True)
+    information = models.CharField(max_length=300, null=True)
 

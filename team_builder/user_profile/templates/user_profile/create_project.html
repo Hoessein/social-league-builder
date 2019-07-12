@@ -8,6 +8,8 @@
       <form method="POST">
         {% csrf_token %}
         {{ create_project_form.as_p }}
+        Position:
+        {{ create_project_position_form.information }}
         <input type="submit" class="button-primary" value="Save project">
         <!--<a class="button" href="{% url 'accounts:signup' %}">Sign Up</a>-->
       </form>

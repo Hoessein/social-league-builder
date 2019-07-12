@@ -85,12 +85,10 @@
       <div class="circle--secondary--module">
         <h4>My Projects</h4>
         <a class="button icon-on-left" href="{% url 'profile:create_project'  %}">Create Project</a>
-
-          {% for x in project %}
+        {% for x in project %}
         <ul class="circle--link--list">
           <li><a href="{% url 'profile:project' pk=x.pk %}">{{ x.name  }}</a></li>
         </ul>
-
           {% endfor %}
 
       </div>
