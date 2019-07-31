@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block body_content %}
+
+<div class="grid-70">
+    {% for notice in request.user.notifications.unread %}
+    <div> {{ notice }}</div>
+    {% endfor %}
+</div>
+
+{% endblock %}

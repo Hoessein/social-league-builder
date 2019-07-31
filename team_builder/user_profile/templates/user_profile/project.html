@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+
+{% load staticfiles %}
+
+{% block body_content %}
+
+  <div class="circle--actions--bar">
+    <div class="bounds">
+      <div class="grid-100">
+        <a class="button" href="{% url 'profile:project-update' pk=project.pk %}">Edit Project</a>
+        <a class="button button-text" href="index.html">Delete Project</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="bounds circle--page circle--article">
+    <div class="grid-70">
+      <div class="circle--article--header">
+        <h4 class="circle--article--section">Project</h4>
+        <h1 class="circle--article--title">{{ project.title }}</h1>
+        <p class="circle--article--byline">Project Owner: <a>{{ project.owner }}</a></p>
+      </div>
+
+      <div class="circle--article--body">
+        <p>{{ project.description }}</p>
+
+
+      </div>
+
+      <div class="circle--project--positions">
+        <h2>Positions</h2>
+
+        {% for position in project.projectposition_set.all %}
+        <ul class="circle--group--list">
+          <li>
+            <h3>{{ position.title }}</h3>
+            <p>{{ position.information }}</p>
+
+
+            {% if project.owner == request.user %}
+            <a class="button button-primary"  href="">You are the owner of this project</a>
+
+
+            {% elif position.filled %}
+            <a class="button button-primary"  href="">Position is already filled</a>
+
+
+            {% elif request.user.pk in popo %}
+            <a class="button button-primary"  href="">You have already applied for this position</a>
+
+            {% else %}
+            <a class="button button-primary"  href="{% url 'profile:apply_position' project.pk %}">Apply</a>
+            {% endif %}
+
+          </li>
+        </ul>
+        {% endfor %}
+
+      </div>
+
+    </div>
+
+
+    <div class="grid-25 grid-push-5">
+      <div class="circle--secondary--module">
+        <h3>Project Needs</h3>
+        <ul class="circle--link--list">
+        {% for position in project.projectposition_set.all %}
+          <li><a>{{ position }}</a></li>
+        </ul>
+        {% endfor %}
+      </div>
+
+      <div class="circle--secondary--module">
+        <h3>Project Timeline</h3>
+        <p>{{ project.timeline }}</p>
+      </div>
+
+      <div class="circle--secondary--module">
+        <h3>Project Skill</h3>
+        <p>{{ project.project_skill }}
+      </div>
+
+    </div>
+  </div>
+
+{% endblock %}

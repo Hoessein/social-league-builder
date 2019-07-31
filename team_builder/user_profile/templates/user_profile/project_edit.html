@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+{% block body_content %}
+
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+ <div class="circle--actions--bar">
+    <div class="bounds">
+      <div class="grid-100">
+        <button type="submit" class="button button-primary">Save Changes</button>
+  <!--<button type="submit" class="button button-primary icon-on-left">Save Changes</button>-->
+
+        <a class="button button-text" href="index.html">Delete Project</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="bounds circle--page circle--article">
+    <div class="grid-70">
+      <div class="circle--article--body">
+        {{ project_form.title.errors }}
+        {{ project_form.title.label }}
+        {{ project_form.title }}
+
+        {{ project_form.description.errors }}
+        {{ project_form.title.label }}
+        {{ project_form.description }}
+      </div>
+
+      <div class="circle--project--positions">
+        <h2>Positions</h2>
+
+        <ul class="circle--group--list circle--clone--list">
+
+
+          <li>
+            {% for position_form in position_forms %}
+            {{ position_form.title.errors }}
+            {{ position_form.title.label }}
+            {{ position_form.title }}
+
+            {{ position_form.information.errors }}
+            {{ position_form.information.label }}
+                        <a class="circle--clone--remove">Remove</a>
+            <a class="circle--clone--remove">Remove</a>
+            <a class="circle--clone--remove">Remove</a>
+            <a class="circle--clone--remove">Remove</a>
+
+            {{ position_form.information }}
+
+            {% endfor %}
+
+            <a class="circle--clone--add">Add Position</a>
+          </li>
+        </ul>
+
+
+      </div>
+
+    </div>
+
+    <div class="grid-25 grid-push-5">
+      <div class="circle--secondary--module">
+        {{ project_form.timeline.errors }}
+
+        <h3>Project Timeline</h3>
+        <!--<textarea placeholder="Time estimate" class="circle&#45;&#45;textarea&#45;&#45;input"></textarea>-->
+        {{ project_form.timeline }}
+      </div>
+      <div class="circle--secondary--module">
+        <h3>Application Requirements</h3>
+        <textarea>Applicants are required to work from our headquarters located in Antarctica.</textarea>
+      </div>
+
+    </div>
+  </div>
+</form>
+{% endblock %}

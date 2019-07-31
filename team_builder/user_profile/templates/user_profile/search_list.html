@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block body_content %}
+<body>
+    <div class="grid-70">
+
+<h2>Past Projects</h2>
+      <table class="u-full-width circle--table">
+        <thead>
+          <tr>
+            <th>Project Title</th>
+            <th class="circle--cell--right">Project Needs</th>
+          </tr>
+        </thead>
+          {% for project in projects %}
+        <tbody>
+          <tr class="clickable-row" data-href="project.html">
+            <td>
+              <h3>{{ project.title  }}</h3>
+            </td>
+            <td class="circle--cell--right">
+              <span class="secondary-label">{{ project.description }}</span>
+            </td>
+            {% for projectposition in project.projectposition_set.all %}
+            <td class="circle--cell--right">
+              <span class="secondary-label">{{ projectposition }}</span>
+            </td>
+            {% endfor %}
+          </tr>
+        </tbody>
+          {% endfor %}
+      </table>
+
+    </div>
+
+</body>
+
+{% endblock body_content %}
