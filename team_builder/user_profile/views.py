@@ -228,7 +228,7 @@ def edit_project(request, pk):
                 position.project = project
                 position.save()
                 print(position, 'DIT IS POSITIONNNNNNNNNNNN')
-            return redirect('profile:my_profile', pk=pk)
+            return redirect('profile:project', pk=pk)
 
     else:
         project_form = forms.CreateProjectForm(instance=project, prefix='project')

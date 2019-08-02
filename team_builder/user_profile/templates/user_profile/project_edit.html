@@ -31,8 +31,12 @@
         <ul class="circle--group--list circle--clone--list">
           <li>
           <h3>Position Title</h3>
-            {{ position_formset.management_form }
+            {{ position_formset.management_form }}
             {% for form in position_formset %}
+                {% for hidden in form.hidden_fields %}
+                  {{ hidden }}
+              {% endfor %}
+            {{ form.errors }}
             {{ form.title }}
 
           <h5>Position Information</h5>
