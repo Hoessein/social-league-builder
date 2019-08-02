@@ -12,7 +12,7 @@ urlpatterns =\
 
         path('project/<int:pk>/', views.ProjectView.as_view(), name='project'),
         path('project/<int:pk>/update/', views.edit_project, name='project-update'),
-        path('project/<int:pk>/apply/', views.apply_position, name='apply_position'),
+        path('project/<int:project_pk>/apply/<int:position_pk>/', views.apply_position, name='apply_position'),
         path('applications/applicant/<int:applicant_pk>/reject', views.reject_application,
              name='reject_application'),
 

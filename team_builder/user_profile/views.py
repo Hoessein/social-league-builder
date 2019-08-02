@@ -20,6 +20,7 @@ from .models import Profile, Project, ProjectPosition, Applicant, ProjectSkill, 
 
 from . import forms
 
+
 def index(request):
     return render(request, 'index.html')
 
@@ -45,8 +46,6 @@ def profile_edit(request):
         profile_form = forms.EditProfileForm(instance=instance)
         user_form = forms.EditUserForm(request.POST or None, instance=request.user,)
         skill_form = forms.ProfileSkillForm(instance=skill_instance)
-
-
 
     return render(request,
                   'user_profile/profile_edit.html',
@@ -108,19 +107,20 @@ class ProjectView(DetailView):
         # you have already applied
         # maak een lijst met gebruikers
         # kijk of inlgelogde gebruiker in die lijst zit
-        position = ProjectPosition.objects.get(project__id=self.kwargs.get('pk'))
-        hey = position.applicant_set.all()
-        lista = []
+        context['positions'] = ProjectPosition.objects.filter(project__id=self.kwargs.get('pk'))
 
-        for x in hey:
-            lista.append(x.name.pk)
-            print(lista)
-
-        context['popo'] = lista
-
-        # You are the project owner.
+        # applicants = position.applicant_set.all()
+        # lista = []
+        #
+        # for x in hey:
+        #     lista.append(x.name.pk)
+        #     print(lista)
+        #
+        # context['popo'] = lista
+        user_list = 'hhhhh'
 
         context['project'] = Project.objects.get(pk=self.kwargs.get('pk'))
+        context['user_list'] = user_list
 
 
         return context
@@ -209,33 +209,35 @@ def edit_project(request, pk):
     position = ProjectPosition.objects.filter(project__id=pk)
 
     if request.method == 'POST':
-        position_forms = forms.PositionModelFormset(request.POST, queryset=position, prefix='position')
+        position_formset = forms.PositionModelFormset(request.POST, queryset=position, prefix='position')
         project_form = forms.CreateProjectForm(request.POST, instance=project, prefix='project')
 
         # # print('i can make it past here')
         # print('TEST', position_form.data)
         # print('TEST', project_form.data)
 
-        if  position_forms.is_valid() and project_form.is_valid():
-            project = project_form.save()
+        if project_form.is_valid() and position_formset.is_valid():
 
-
-            #relation hasn't been made yet.
-            position = position_forms.save(commit=False)
-
-            position.project = project
-            position.save()
+            project = project_form.save(commit=False)
+            project.owner = request.user
             project.save()
-            return redirect('profile:project', pk=pk)
+            print(project, 'DIT IS PROJECTTTTTTTTTTTTTT')
+
+            for form in position_formset:
+                position = form.save(commit=False)
+                position.project = project
+                position.save()
+                print(position, 'DIT IS POSITIONNNNNNNNNNNN')
+            return redirect('profile:my_profile', pk=pk)
 
     else:
         project_form = forms.CreateProjectForm(instance=project, prefix='project')
-        position_forms = forms.PositionModelFormset(queryset=position, prefix='position')
+        position_formset = forms.PositionModelFormset(queryset=position, prefix='position')
 
     return render(request,
                   'user_profile/project_edit.html',
                   {'project_form': project_form,
-                   'position_forms': position_forms,
+                   'position_formset': position_formset,
                    }
                   )
 
@@ -265,14 +267,22 @@ def edit_project(request, pk):
 #                    }
 #                   )
 #
-def apply_position(request, pk):
-    project = get_object_or_404(Project, pk=pk)
-    position = ProjectPosition.objects.get(project__id=project.pk)
-    pending_status = position.applicant_set.create(status='p', name=request.user)
-    pending_status.save()
-    print("STATUS AANGEPAST!", pending_status)
+def apply_position(request, project_pk, position_pk):
+    project = get_object_or_404(Project, pk=project_pk)
+    positions = ProjectPosition.objects.filter(project__id=project.pk,)
+    print(position_pk, 'OALKJDFLKAJDSFLKAJSDLFKJ')
+    kk = ProjectPosition.objects.get(id=position_pk)
+    print(kk.applicant_set.all(), 'hopi')
 
-    return redirect('profile:project', pk=project.pk)
+    for position in positions:
+        if position.pk == position_pk:
+            pending_status = position.applicant_set.create(status='p', name=request.user)
+            pending_status.save()
+            print("STATUS AANGEPAST!", pending_status)
+
+        # for applicant in position.applicant_set.all().values('name'):
+
+        return redirect('profile:project', pk=project.pk)
 
 def reject_application(request, applicant_pk):
     # project = get_object_or_404(Project, pk=project_pk)
