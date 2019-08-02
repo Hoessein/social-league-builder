@@ -221,7 +221,7 @@ def edit_project(request, pk):
             project = project_form.save(commit=False)
             project.owner = request.user
             project.save()
-            print(project, 'DIT IS PROJECTTTTTTTTTTTTTT')
+            print(project, 'DI IS PROJECTTTTTTTTTTTTTT')
 
             for form in position_formset:
                 position = form.save(commit=False)
