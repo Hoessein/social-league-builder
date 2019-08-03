@@ -38,18 +38,17 @@
             <p>{{ position.information }}</p>
 
             {% if project.owner == request.user %}
-            <a class="button button-primary"  href="">You are the owner of this project</a>
+              <a class="button button-primary"  href="">You are the owner of this project</a>
 
             {% elif position.filled %}
-            <a class="button button-primary"  href="">Position is already filled</a>
+              <a class="button button-primary"  href="">Position is already filled</a>
 
-            {% elif project.owner != request.user and position.filled != True %}
-            {% for applicant in position.applicant_set.all %}
-            {% if 1 == 1 %}
+            {% elif position.applicant_set.all %}
+              {% for applicant in position.applicant_set.all %}
+                {% if applicant.name == request.user %}
             <a class="button button-primary"  href="">You have already applied for this position</a>
-            {% endif %}
-            {% endfor %}
-
+                {% endif %}
+              {% endfor %}
 
             {% else %}
             <a class="button button-primary"  href="{% url 'profile:apply_position' project.pk position.pk %}">Apply</a>

@@ -22,7 +22,10 @@ from . import forms
 
 
 def index(request):
-    return render(request, 'index.html')
+
+    projects = Project.objects.filter()
+
+    return render(request, 'index.html', {'projects': projects})
 
 
 def profile_edit(request):
@@ -66,7 +69,7 @@ class MyProfileView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['skills'] = ProfileSkill.objects.filter(profile__user=self.request.user)
-        context['project'] = Project.objects.all()
+        context['project'] = Project.objects.filter(owner=self.request.user)
         return context
 
 
