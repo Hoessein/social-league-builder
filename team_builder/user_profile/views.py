@@ -5,6 +5,8 @@ from django.db import transaction
 from django.forms.models import inlineformset_factory, modelformset_factory
 from django.views.decorators.csrf import csrf_protect
 from django.db.models import Q
+from django.db.models import Exists, OuterRef
+
 
 
 
@@ -339,7 +341,10 @@ class ProjectListView(ListView):
         qs = super().get_queryset()
         query = self.request.GET.get('query')
         if query:
-            qs = qs.filter(Q(title__icontains=query) | (Q(description__icontains=query) | (Q(projectposition__title__icontains=query))))
+            qs = qs.filter(
+                Q(title__icontains=query) |(
+                Q(description__icontains=query)
+                ))
         return qs
 
 # apply knop:

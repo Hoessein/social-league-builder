@@ -24,7 +24,7 @@
           <li><a class="selected">All Needs</a></li>
         {% for project in projects %}
           {% for position in project.projectposition_set.all %}
-          <li><a>{{ position }}</a></li>
+          <li><a href="{% url 'profile:project' pk=project.pk %}">{{ position }}</a></li>
           {% endfor %}
         {% endfor %}
         </ul>
@@ -45,9 +45,9 @@
             <td>
               <h3><a href="{% url 'profile:project' pk=project.pk %}">{{ project.title }}</a></h3>
             </td>
-            {% for position in project.projectposition_set.all %}
+            {% for position in project.projectposition_set.all|slice:":1" %}
             <td class="circle--cell--right">
-              <span class="secondary-label">{{ position.title }}</span>
+              <span class="secondary-label"> <a href="{% url 'profile:project' pk=project.pk %}">{{ position.title }}</a></span>
               {% endfor %}
             </td>
           </tr>

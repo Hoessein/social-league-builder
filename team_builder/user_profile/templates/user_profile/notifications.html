@@ -1,11 +1,24 @@
 {% extends 'layout.html' %}
 
 {% block body_content %}
+  <div class="bounds circle--page">
 
-<div class="grid-70">
+      <table class="u-full-width circle--table">
+        <thead>
+          <tr>
+            <th>Notifications</th>
+          </tr>
+        </thead>
+        <tbody>
     {% for notice in request.user.notifications.unread %}
-    <div> {{ notice }}</div>
-    {% endfor %}
-</div>
+          <tr class="clickable-row">
+            <td>
+              <h3>>{{ notice }}</h3>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
 
 {% endblock %}
