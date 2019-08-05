@@ -10,6 +10,7 @@ from .models import Project, ProjectPosition, Applicant, ProfileSkill
 from . import forms
 
 
+
 def index(request):
     projects = Project.objects.filter()
     return render(request, 'index.html', {'projects': projects})
