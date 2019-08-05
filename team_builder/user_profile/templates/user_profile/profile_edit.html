@@ -65,10 +65,14 @@
         <h4>My Skills</h4>
         <ul class="circle--clone--list">
           <li>
-            {% if skill_form.name %}
-            {{ skill_form.name }}
-            {% endif %}
-            <a class="circle--clone--add">Add Skill</a>
+          {{ skill_formset.management_form }}
+            {% for skill_form in skill_formset %}
+              {% for hidden in skill_form.hidden_fields %}
+                {{ hidden }}
+              {% endfor %}
+                {{ skill_form.name }}
+            {% endfor %}
+            <a class="circle--clone--add" id="add_skill">>Add Skill</a>
             <a class="circle--clone--remove">Remove</a>
           </li>
         </ul>

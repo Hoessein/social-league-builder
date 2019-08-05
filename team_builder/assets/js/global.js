@@ -37,6 +37,10 @@ $(".circle--clone--list").on("click", ".circle--clone--add", function () {
       information.attr("name", "position-" + i + "-information");
       information.attr("id", "id_position-" + i + "-information");
 
+      var information = $(this).find("input[id*='-information']");
+      information.attr("name", "position-" + i + "-information");
+      information.attr("id", "id_position-" + i + "-information");
+
     });
   }
 
