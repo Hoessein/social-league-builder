@@ -47,7 +47,7 @@ class CreateProjectForm(forms.ModelForm):
 PositionModelFormset = modelformset_factory(
     ProjectPosition,
     fields=('title', 'information',),
-    extra=0,
+    extra=1,
     widgets={
         'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'title!'}),
         'information': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'information!'}),
