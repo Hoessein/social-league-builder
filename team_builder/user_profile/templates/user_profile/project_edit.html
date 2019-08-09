@@ -29,26 +29,22 @@
         <h2>Positions</h2>
 
         <ul class="circle--group--list circle--clone--list">
-          <li>
           <h3>Position Title</h3>
-            {{ position_formset.management_form }}
             {% for form in position_formset %}
                 {% for hidden in form.hidden_fields %}
                   {{ hidden }}
               {% endfor %}
             {{ form.errors }}
-            {{ form.title }}
-
+             <li>
+             {{ position_formset.management_form }}
+               {{ form.title }}
           <h5>Position Information</h5>
-
             {{ form.information }}
             <a class="circle--clone--add" id="add_position">Add Position</a>
             <a class="circle--clone--remove">Remove</a>
           </li>
         {% endfor %}
         </ul>
-
-
       </div>
     </div>
 

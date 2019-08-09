@@ -57,15 +57,10 @@ PositionModelFormset = modelformset_factory(
 
 SkillModelFormset = modelformset_factory(
     ProfileSkill,
-    fields=('name',),
+    fields=('skill_name',),
     extra=1,
     widgets={
-        'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'name!'}),
+        'skill_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'name!'}),
 
     }
 )
-
-class ProfileSkillForm(forms.ModelForm):
-    class Meta:
-        model = ProfileSkill
-        fields = ('name',)

@@ -10,7 +10,6 @@ from .models import Project, ProjectPosition, Applicant, ProfileSkill
 from . import forms
 
 
-
 def index(request):
     projects = Project.objects.filter()
     return render(request, 'index.html', {'projects': projects})
@@ -24,7 +23,6 @@ def profile_edit(request):
     if request.method == 'POST':
         profile_form = forms.EditProfileForm(request.POST, instance=instance)
         user_form = forms.EditUserForm(request.POST, request.FILES, instance=request.user)
-        # skill_form = forms.ProfileSkillForm(request.POST, instance=skill_instance)
         skill_formset = forms.SkillModelFormset(request.POST, queryset=skill_instance)
 
         if profile_form.is_valid() and user_form.is_valid() and skill_formset.is_valid():

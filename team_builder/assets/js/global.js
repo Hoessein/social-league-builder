@@ -13,6 +13,7 @@ $(".circle--clone--list").on("click", ".circle--clone--add", function () {
     copy.find("input[type='text'], textarea, select").val("");
     copy.find("*:first-child").focus();
     updatePositions();
+    updateskill();
 
   });
 
@@ -20,6 +21,7 @@ $(".circle--clone--list").on("click", ".circle--clone--add", function () {
     var parent = $(this).parent("li");
     parent.remove();
     updatePositions();
+    updateskill();
   });
 
   function updatePositions() {
@@ -37,9 +39,20 @@ $(".circle--clone--list").on("click", ".circle--clone--add", function () {
       information.attr("name", "position-" + i + "-information");
       information.attr("id", "id_position-" + i + "-information");
 
-      var information = $(this).find("input[id*='-information']");
-      information.attr("name", "position-" + i + "-information");
-      information.attr("id", "id_position-" + i + "-information");
+    });
+  }
+
+
+  function updateskill() {
+    var listskill = $("ul.circle--clone--list li");
+    listskill.each(function (i) {
+
+      var skill_TOTAL_FORMS = $(this).find('#id_form-TOTAL_FORMS');
+      skill_TOTAL_FORMS.val(listskill.length);
+
+      var skill_name = $(this).find("input[id*='-skill_name']");
+      information.attr("name", "form" + i + "-skill_name");
+      information.attr("id", "id_form-" + i + "-skill_name");
 
     });
   }

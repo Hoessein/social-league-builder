@@ -64,20 +64,20 @@
       <div class="circle--secondary--module">
         <h4>My Skills</h4>
         <ul class="circle--clone--list">
-          <li>
-          {{ skill_formset.management_form }}
             {% for skill_form in skill_formset %}
               {% for hidden in skill_form.hidden_fields %}
                 {{ hidden }}
               {% endfor %}
-                {{ skill_form.name }}
-            {% endfor %}
+            <li>
+            {{ skill_formset.management_form }}
+            {{ skill_form.errors }}
+            {{ skill_form.skill_name }}
             <a class="circle--clone--add" id="add_skill">>Add Skill</a>
             <a class="circle--clone--remove">Remove</a>
           </li>
+            {% endfor %}
         </ul>
       </div>
-
     </div>
 
   </div>

@@ -72,7 +72,7 @@ class Applicant(models.Model):
     position = models.ForeignKey('ProjectPosition', on_delete=models.CASCADE)
 
 class ProfileSkill(models.Model):
-    name = models.CharField(max_length=50)
+    skill_name = models.CharField(max_length=50)
     # one profile can have many skills
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE,)
 
