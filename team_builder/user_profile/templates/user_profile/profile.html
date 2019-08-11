@@ -4,8 +4,6 @@
 
 {% block body_content %}
 <body>
-
-
   <div class="bounds circle--page">
     <div class="circle--page--header circle--fluid">
 
@@ -13,7 +11,9 @@
         <h2>Profile</h2>
       </div>
       <div class="circle--fluid--cell circle--fluid--secondary">
-        <a class="button icon-on-left" href="{% url 'profile:profile-update'  %}">Edit</a>
+        {% if profile.user.pk == request.user.pk %}
+        <a class="button icon-on-left" href="{% url 'profile:profile-update' profile.user.pk  %}">Edit</a>
+        {% endif %}
       </div>
     </div>
 
@@ -24,7 +24,7 @@
         <p>{{ profile.bio }}</p>
       </div>
 
-      <h2>Past Projects</h2>
+      <h2>Current Projects</h2>
       <table class="u-full-width circle--table">
         <thead>
           <tr>
@@ -33,22 +33,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="clickable-row" data-href="project.html">
+          <tr class="clickable-row">
+            {% for project in applicants %}
             <td>
-              <h3>Invoice Delivery Tool</h3>
+              <h3>{{ project.position.project.title }}</h3>
             </td>
             <td class="circle--cell--right">
-              <span class="secondary-label">Rails Developer</span>
+              <span class="secondary-label">{{ project.position.project.description  }}</span>
             </td>
+            {% endfor %}
           </tr>
-          <tr class="clickable-row" data-href="project.html">
-            <td>
-              <h3>Twitter Client</h3>
-            </td>
-            <td class="circle--cell--right">
-              <span class="secondary-label">Designer</span>
-            </td>
-          </tr>
+
         </tbody>
       </table>
     </div>
@@ -67,16 +62,17 @@
         <ul class="unloaded">
           <li>{{ skill.skill_name }}</li>
         </ul>
-
         {% endfor %}
       </div>
 
       <div class="circle--secondary--module">
-        <h4>My Projects</h4>
-        <a class="button icon-on-left" href="{% url 'profile:create_project'  %}">Create Project</a>
-        {% for x in project %}
+        <h4>{{ profile.user.username }}'s Projects</h4>
+        {% if profile.user.pk == request.user.pk %}
+          <a class="button icon-on-left" href="{% url 'profile:create_project'  %}">Create Project</a>
+        {% endif %}
+        {% for project in projects %}
         <ul class="circle--link--list">
-          <li><a href="{% url 'profile:project' pk=x.pk %}">{{ x.title }}</a></li>
+          <li><a href="{% url 'profile:project' pk=project.pk %}">{{ project.title }}</a></li>
         </ul>
           {% endfor %}
 

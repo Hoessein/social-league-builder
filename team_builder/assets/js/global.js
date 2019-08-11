@@ -51,8 +51,8 @@ $(".circle--clone--list").on("click", ".circle--clone--add", function () {
       skill_TOTAL_FORMS.val(listskill.length);
 
       var skill_name = $(this).find("input[id*='-skill_name']");
-      information.attr("name", "form" + i + "-skill_name");
-      information.attr("id", "id_form-" + i + "-skill_name");
+      skill_name.attr("name", "form" + i + "-skill_name");
+      skill_name.attr("id", "id_form-" + i + "-skill_name");
 
     });
   }

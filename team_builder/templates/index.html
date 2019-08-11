@@ -19,12 +19,11 @@
 
     <div class="grid-25">
       <div class="circle--filter circle--secondary--module">
-        <h4>Project Needs</h4>
+        <h4> Project Filter</h4>
         <ul class="circle--filter--list">
-          <li><a class="selected">All Needs</a></li>
         {% for project in projects %}
           {% for position in project.projectposition_set.all %}
-          <li><a href="{% url 'profile:project' pk=project.pk %}">{{ position }}</a></li>
+          <li><a href="{% url 'profile:filter-projects' position %}">{{ position }}</a></li>
           {% endfor %}
         {% endfor %}
         </ul>
@@ -41,7 +40,7 @@
         </thead>
         <tbody>
         {% for project in projects %}
-          <tr class="clickable-row" data-href="project.html">
+          <tr class="clickable-row">
             <td>
               <h3><a href="{% url 'profile:project' pk=project.pk %}">{{ project.title }}</a></h3>
             </td>
@@ -56,4 +55,4 @@
       </table>
     </div>
   </div>
-{% endblock body_content %}
+{% endblock %}

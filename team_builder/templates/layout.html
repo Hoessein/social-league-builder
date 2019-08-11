@@ -58,7 +58,7 @@
               <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
               <li><a href="{% url 'login' %}">Sign In</a></li>
               {% else %}
-              <li><a href="{% url 'profile:my_profile' %}">{{ user.username }}</a></li>
+              <li><a href="{% url 'profile:my_profile' pk=request.user.pk %}">{{ user.username }}</a></li>
               <li><a href="{% url 'profile:notifications' %}">Notifications</a></li>
 
               <li><a href="{% url 'accounts:signout' %}">Sign Out</a></li>
@@ -74,18 +74,15 @@
   <div class="circle--actions--bar">
     <nav class="bounds">
       <ul class="circle--pill--list">
-        {% if 'applications' in request.path %}
-        <li><a class="selected" href="{% url 'profile:applications'  %}">Applications</a></li>
-        <li><a href="{% url 'profile:my_profile' %}">Profile</a></li>
-        {% elif 'profile' in request.path %}
-        <li><a href="{% url 'profile:applications'  %}">Applications</a></li>
-        <li><a class="selected" href="{% url 'profile:my_profile' %}">Profile</a></li>
+        {% if user.is_authenticated %}
+        <li><a {% if 'applications' in request.path %} class="selected" {% endif %} href="{% url 'profile:all_applications' %}">Applications</a></li>
+        <li><a {% if 'profile' in request.path and 'applications' not in request.path%} class="selected" {% endif %} href="{% url 'profile:my_profile' pk=request.user.pk %}">Profile</a></li>
         {% endif %}
       </ul>
     </nav>
   </div>
 
 </form>
-          {% block body_content %}{% endblock %}
+  {% block body_content %}{% endblock %}
 
 </body>

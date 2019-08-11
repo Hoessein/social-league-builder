@@ -28,12 +28,9 @@ class Profile(models.Model):
         return reverse('profile:my_profile')
 
 
-
-
-
 class Project(models.Model): #article
     project_skill = models.CharField(max_length=400)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, unique=False)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     description = models.TextField(max_length=300)
     title = models.CharField(max_length=100)
     timeline = models.CharField(max_length=20)
@@ -67,9 +64,10 @@ class Applicant(models.Model):
         (PENDING, 'Pending'),
     )
 
-    name = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    name = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES,)
     position = models.ForeignKey('ProjectPosition', on_delete=models.CASCADE)
+
 
 class ProfileSkill(models.Model):
     skill_name = models.CharField(max_length=50)
@@ -78,6 +76,7 @@ class ProfileSkill(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class ProjectSkill(models.Model):
     name = models.CharField(max_length=50)

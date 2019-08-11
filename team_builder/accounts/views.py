@@ -23,6 +23,10 @@ class LoginView(generic.FormView):
         login(self.request, form.get_user())
         return super().form_valid(form)
 
+    def get_success_url(self):
+        profile_pk = self.request.user.pk
+        return reverse_lazy('profile:my_profile', kwargs={'pk': profile_pk})
+
 
 class LogOutView(generic.RedirectView):
     url = reverse_lazy("index")
