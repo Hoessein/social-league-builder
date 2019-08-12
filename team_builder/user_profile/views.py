@@ -208,6 +208,7 @@ def edit_project(request, pk):
                        }
                       )
 
+
 @login_required
 def delete_project(request, pk):
     """allows user to delete a project"""
@@ -279,7 +280,7 @@ class ProjectListView(LoginRequiredMixin, ListView):
                 ))
         return qs
 
-
+@login_required
 class NotificationsView(LoginRequiredMixin, ListView):
     """creates notifications for user"""
     template_name = "user_profile/notifications.html"
