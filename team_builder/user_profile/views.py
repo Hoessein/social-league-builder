@@ -223,12 +223,21 @@ def apply_position(request, project_pk, position_pk):
     """allows user to apply for a position in a project"""
     project = get_object_or_404(Project, pk=project_pk)
     positions = ProjectPosition.objects.filter(project__id=project.pk,)
-
     for position in positions:
+        # print(position)
+        #         print(applicant.name.pk)
+        #         print(request.user.pk)
+        #         print(position.pk)
+        #         print(position_pk)
+
         if position.pk == position_pk:
+            for applicant in position.applicant_set.filter():
+                if applicant.name.pk == request.user.pk:
+                    raise Exception ('You have already applied for this position!')
+
             pending_status = position.applicant_set.create(status='p', name=request.user)
             pending_status.save()
-        return redirect('profile:project', pk=project.pk)
+            return redirect('profile:project', pk=project.pk)
 
 
 @login_required
@@ -280,7 +289,7 @@ class ProjectListView(LoginRequiredMixin, ListView):
                 ))
         return qs
 
-@login_required
+
 class NotificationsView(LoginRequiredMixin, ListView):
     """creates notifications for user"""
     template_name = "user_profile/notifications.html"

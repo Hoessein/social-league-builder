@@ -24,7 +24,6 @@ urlpatterns =\
         path('create_project/', views.create_project, name='create_project'),
         path('search_project/', views.ProjectListView.as_view(), name='search_project'),
 
-        # path('applications/', views.CreateProject.as_view(), name='create_project'),
         path('notifications', views.NotificationsView.as_view(), name="notifications"),
 
         path('all-applications/', views.ApplicationsView.as_view(), name='all_applications'),

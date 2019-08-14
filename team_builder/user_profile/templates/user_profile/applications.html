@@ -36,7 +36,7 @@
           <tr>
             <th>Applicant</th>
             <th class="circle--cell--right">Applicant Position</th>
-            <th class="circle--cell--right">Accept - Reject</th>
+            <th class="circle--cell--right">Status</th>
           </tr>
         </thead>
         <tbody>
@@ -51,9 +51,15 @@
               <span class="secondary-label">{{ applicant.position.title }}</span>
             </td>
               <td class="circle--cell--right">
+                {% if applicant.status == 'p' %}
                 <a class="button icon-on-left" href="{% url 'profile:accept_application' applicant_pk=applicant.pk %}">Accept</a> -
                 <a class="button icon-on-left" href="{% url 'profile:reject_application' applicant_pk=applicant.pk %}">Reject</a>
+                {% elif applicant.status == 'a' %}
+                <a class="button icon-on-left"><font color= "green"> Accepted</font></a>
+                {% elif applicant.status == 'r' %}
+                <a class="button icon-on-left"><font color= "red">Rejected</font></a>
                 {% endif %}
+              {% endif %}
             </td>
           </tr>
         {% endfor %}
