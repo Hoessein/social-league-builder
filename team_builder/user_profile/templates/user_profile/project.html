@@ -30,9 +30,11 @@
       </div>
 
       <div class="circle--project--positions">
+
         <h2>Positions</h2>
 
         {% for position in positions %}
+        {% if position.title and position.information %}
 
         <ul class="circle--group--list">
           <li>
@@ -55,8 +57,9 @@
             {% else %}
             <a class="button button-primary"  href="{% url 'profile:apply_position' project.pk position.pk %}">Apply</a>
             {% endif %}
-
           </li>
+            {% endif %}
+
         </ul>
         {% endfor %}
 

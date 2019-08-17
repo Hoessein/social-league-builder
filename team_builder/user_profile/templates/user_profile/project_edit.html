@@ -10,7 +10,7 @@
     <div class="bounds">
       <div class="grid-100">
         <button type="submit" class="button button-primary">Save Changes</button>
-        <a class="button button-text" href="{% url 'index' %}">Discard</a>
+        <a class="button button-text" href="index.html">Discard</a>
       </div>
     </div>
   </div>
@@ -27,24 +27,29 @@
 
       <div class="circle--project--positions">
         <h2>Positions</h2>
+            {{ position_formset.errors }}
+                                  {{ position_formset.management_form }}
 
         <ul class="circle--group--list circle--clone--list">
-          <h3>Position Title</h3>
             {% for form in position_formset %}
-                {% for hidden in form.hidden_fields %}
-                  {{ hidden }}
+              {% for hidden in form.hidden_fields %}
+                {{ hidden }}
               {% endfor %}
-            {{ form.errors }}
-             <li>
-             {{ position_formset.management_form }}
-               {{ form.title }}
-          <h5>Position Information</h5>
+            <li>
+          <h3>Position Title</h3>
+                          {{ position_formset.management_form }}
+
+              {{ form.title }}
+          <h3>Position Information</h3>
+                          {{ position_formset.management_form }}
+
             {{ form.information }}
             <a class="circle--clone--add" id="add_position">Add Position</a>
-            <a class="circle--clone--remove">Remove</a>
+            <a class="circle--clone--remove" id="remove_position" >Remove</a>
           </li>
         {% endfor %}
         </ul>
+
       </div>
     </div>
 
@@ -66,5 +71,3 @@
 </form>
 {% endblock %}
 
-
-<!-- create_normal.html :: part 4 -->

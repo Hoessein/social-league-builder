@@ -224,14 +224,10 @@ def apply_position(request, project_pk, position_pk):
     project = get_object_or_404(Project, pk=project_pk)
     positions = ProjectPosition.objects.filter(project__id=project.pk,)
     for position in positions:
-        # print(position)
-        #         print(applicant.name.pk)
-        #         print(request.user.pk)
-        #         print(position.pk)
-        #         print(position_pk)
 
         if position.pk == position_pk:
             for applicant in position.applicant_set.filter():
+                # # prevents user to apply more than once directly via the link
                 if applicant.name.pk == request.user.pk:
                     raise Exception ('You have already applied for this position!')
 
