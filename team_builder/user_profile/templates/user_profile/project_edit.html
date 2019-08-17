@@ -28,7 +28,7 @@
       <div class="circle--project--positions">
         <h2>Positions</h2>
             {{ position_formset.errors }}
-                                  {{ position_formset.management_form }}
+            {{ position_formset.management_form }}
 
         <ul class="circle--group--list circle--clone--list">
             {% for form in position_formset %}
@@ -37,15 +37,14 @@
               {% endfor %}
             <li>
           <h3>Position Title</h3>
-                          {{ position_formset.management_form }}
 
               {{ form.title }}
           <h3>Position Information</h3>
-                          {{ position_formset.management_form }}
+            {{ position_formset.management_form }}
 
             {{ form.information }}
             <a class="circle--clone--add" id="add_position">Add Position</a>
-            <a class="circle--clone--remove" id="remove_position" >Remove</a>
+            <a class="circle--clone--remove">Remove</a>
           </li>
         {% endfor %}
         </ul>
