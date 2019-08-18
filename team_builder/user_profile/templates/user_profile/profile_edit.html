@@ -63,16 +63,16 @@
 
       <div class="circle--secondary--module">
         <h4>My Skills</h4>
+        You can add 3 skills.
         <ul class="circle--clone--list">
             {% for skill_form in skill_formset %}
               {% for hidden in skill_form.hidden_fields %}
                 {{ hidden }}
               {% endfor %}
             <li>
+            {{ skill_formset.management_form }}
             {{ skill_form.errors }}
             {{ skill_form.skill_name }}
-            {{ skill_formset.management_form }}
-
           </li>
             {% endfor %}
         </ul>
