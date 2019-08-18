@@ -10,7 +10,7 @@
     <div class="bounds">
       <div class="grid-100">
         <button type="submit" class="button button-primary">Save Changes</button>
-        <a class="button button-text" href="index.html">Discard</a>
+        <a class="button button-text" href="{% url 'index' %}">Discard</a>
       </div>
     </div>
   </div>
@@ -27,8 +27,9 @@
 
       <div class="circle--project--positions">
         <h2>Positions</h2>
-            {{ position_formset.errors }}
-            {{ position_formset.management_form }}
+          You can add up to 3 positions.
+
+        {{ position_formset.management_form }}
 
         <ul class="circle--group--list circle--clone--list">
             {% for form in position_formset %}
@@ -37,14 +38,13 @@
               {% endfor %}
             <li>
           <h3>Position Title</h3>
-
+              {{ position_formset.management_form }}
+              {{ form.title.errors}}
               {{ form.title }}
           <h3>Position Information</h3>
             {{ position_formset.management_form }}
-
+            {{ form.information.errors }}
             {{ form.information }}
-            <a class="circle--clone--add" id="add_position">Add Position</a>
-            <a class="circle--clone--remove">Remove</a>
           </li>
         {% endfor %}
         </ul>
@@ -61,7 +61,7 @@
 
 
       <div class="circle--secondary--module">
-        <h3>Skills</h3>
+        <h3>Skill</h3>
         {{ project_form.project_skill }}
       </div>
 

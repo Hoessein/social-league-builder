@@ -42,8 +42,8 @@ class Project(models.Model): #article
 class ProjectPosition(models.Model):
     #one project can have many positions
     project = models.ForeignKey(Project, on_delete=models.CASCADE,)
-    title = models.CharField(max_length=300)
-    information = models.TextField(max_length=300)
+    title = models.CharField(max_length=300, blank=True)
+    information = models.TextField(max_length=300, blank=True)
     apply = models.BooleanField(default=False)
     timeline = models.CharField(max_length=20)
     filled = models.BooleanField(default=False)
@@ -70,12 +70,12 @@ class Applicant(models.Model):
 
 
 class ProfileSkill(models.Model):
-    skill_name = models.CharField(max_length=50)
+    skill_name = models.CharField(max_length=50, blank=True)
     # one profile can have many skills
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE,)
 
     def __str__(self):
-        return self.name
+        return self.skill_name
 
 
 class ProjectSkill(models.Model):

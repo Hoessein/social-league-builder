@@ -23,7 +23,9 @@
         <ul class="circle--filter--list">
         {% for project in projects %}
           {% for position in project.projectposition_set.all %}
-          <li><a href="{% url 'profile:filter-projects' position %}">{{ position }}</a></li>
+          {% if position.title and position.information %}
+          <li><a href="{% url 'profile:filter-projects' position %}">{{ position.title }}</a></li>
+          {% endif %}
           {% endfor %}
         {% endfor %}
         </ul>
@@ -40,14 +42,16 @@
         </thead>
         <tbody>
         {% for project in projects %}
+          {% for position in project.projectposition_set.all|slice:":1" %}
+            {% if position.title and position.information %}
           <tr class="clickable-row">
             <td>
               <h3><a href="{% url 'profile:project' pk=project.pk %}">{{ project.title }}</a></h3>
             </td>
-            {% for position in project.projectposition_set.all|slice:":1" %}
             <td class="circle--cell--right">
               <span class="secondary-label"> <a href="{% url 'profile:project' pk=project.pk %}">{{ position.title }}</a></span>
-              {% endfor %}
+              {% endif %}
+            {% endfor %}
             </td>
           </tr>
         {% endfor %}

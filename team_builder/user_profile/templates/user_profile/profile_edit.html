@@ -69,11 +69,10 @@
                 {{ hidden }}
               {% endfor %}
             <li>
-            {{ skill_formset.management_form }}
             {{ skill_form.errors }}
             {{ skill_form.skill_name }}
-            <a class="circle--clone--add" id="add_position">>Add Skill</a>
-            <a class="circle--clone--remove">Remove</a>
+            {{ skill_formset.management_form }}
+
           </li>
             {% endfor %}
         </ul>

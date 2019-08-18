@@ -47,7 +47,8 @@ class CreateProjectForm(forms.ModelForm):
 PositionModelFormset = modelformset_factory(
     ProjectPosition,
     fields=('title', 'information',),
-    extra=1,
+    extra=3,
+    max_num=3,
     widgets={
         'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'title!'}),
         'information': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'information!'}),
@@ -59,6 +60,7 @@ SkillModelFormset = modelformset_factory(
     ProfileSkill,
     fields=('skill_name',),
     extra=1,
+    max_num=3,
     widgets={
         'skill_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'name!'}),
 
