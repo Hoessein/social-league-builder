@@ -33,13 +33,13 @@
           </tr>
         </thead>
         <tbody>
+          {% for project in applicants %}
           <tr class="clickable-row">
-            {% for project in applicants %}
             <td>
               <h3>{{ project.position.project.title }}</h3>
             </td>
             <td class="circle--cell--right">
-              <span class="secondary-label">{{ project.position.project.description  }}</span>
+              <span class="secondary-label">{{ project.position.project.description|slice:":1" }}</span>
             </td>
             {% endfor %}
           </tr>

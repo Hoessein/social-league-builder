@@ -25,7 +25,7 @@
           {{ profile_form.bio }}
       </div>
 
-      <h2>Past Projects</h2>
+      <h2>Current Projects</h2>
       <table class="u-full-width circle--table">
         <thead>
           <tr>
@@ -35,21 +35,16 @@
         </thead>
         <tbody>
           <tr class="clickable-row">
+            {% for project in applicants %}
             <td>
-              <h3>Invoice Delivery Tool</h3>
+              <h3>{{ project.position.project.title }}</h3>
             </td>
             <td class="circle--cell--right">
-              <span class="secondary-label">Rails Developer</span>
+              <span class="secondary-label">{{ project.position.project.description  }}</span>
             </td>
+            {% endfor %}
           </tr>
-          <tr class="clickable-row" data-href="project.html">
-            <td>
-              <h3>Twitter Client</h3>
-            </td>
-            <td class="circle--cell--right">
-              <span class="secondary-label">Designer</span>
-            </td>
-          </tr>
+
         </tbody>
       </table>
     </div>

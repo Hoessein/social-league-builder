@@ -41,9 +41,11 @@
         </thead>
         <tbody>
           {% for applicant in applicants %}
+                        {% if applicant.position.project.owner == request.user %}
+                {% if applicant.position.title %}
+
           <tr class="clickable-row">
             <td>
-              {% if applicant.position.project.owner == request.user %}
               <h3><a href="{% url 'profile:my_profile' pk=applicant.name.pk %}">{{ applicant.name.username }}</a> </h3>
               <p><a href="{% url 'profile:project' applicant.position.project.pk %}">{{ applicant.position.project.title }}</a></p>
             </td>
@@ -59,10 +61,16 @@
                 {% elif applicant.status == 'r' %}
                 <a class="button icon-on-left"><font color= "red">Rejected</font></a>
                 {% endif %}
+
               {% endif %}
             </td>
+            {% endif %}
+
+
           </tr>
+
         {% endfor %}
+
 
         </tbody>
 
