@@ -6,7 +6,7 @@ ____________________________________________
 3. Change directory to team_builder
 4. Open the shell and run: pip install -r requirements.txt
 5. Run: python manage.py makemigrations
-6. RUn: python manage.py migrate
+6. Run: python manage.py migrate
 
 and you're good to go.
 ______________________________________________
