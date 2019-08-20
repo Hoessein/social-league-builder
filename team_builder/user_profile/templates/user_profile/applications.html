@@ -41,7 +41,7 @@
         </thead>
         <tbody>
           {% for applicant in applicants %}
-                        {% if applicant.position.project.owner == request.user %}
+            {% if applicant.position.project.owner == request.user %}
                 {% if applicant.position.title %}
 
           <tr class="clickable-row">
@@ -61,12 +61,9 @@
                 {% elif applicant.status == 'r' %}
                 <a class="button icon-on-left"><font color= "red">Rejected</font></a>
                 {% endif %}
-
               {% endif %}
             </td>
             {% endif %}
-
-
           </tr>
 
         {% endfor %}
