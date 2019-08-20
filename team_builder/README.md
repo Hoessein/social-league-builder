@@ -8,7 +8,10 @@ ____________________________________________
 5. Run: python manage.py makemigrations
 6. RUn: python manage.py migrate
 
-and you're good to go. 
+and you're good to go.
+______________________________________________
+
+TREEHOUSE PROJECT DESCRIPTION
 
 
 It's time to build a single, large project that pull everything together!
