@@ -70,7 +70,7 @@ class Applicant(models.Model):
 
 
 class ProfileSkill(models.Model):
-    skill_name = models.CharField(max_length=50, blank=True, default="")
+    skill_name = models.CharField(max_length=50, blank=True)
     # one profile can have many skills
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE,)
 
@@ -79,7 +79,7 @@ class ProfileSkill(models.Model):
 
 
 class ProjectSkill(models.Model):
-    name = models.CharField(max_length=50, default="")
+    name = models.CharField(max_length=50)
     # one profile can have many skills
     project = models.ForeignKey(Project, on_delete=models.CASCADE,)
 
